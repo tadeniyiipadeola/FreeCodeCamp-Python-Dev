@@ -52,11 +52,29 @@ class Item:
         return f"Item('{self.name}', {self.price}, {self.quantity})"
 
 
-print(Item.is_integer((7.01)))
+# imagine you have an Item phone with two instance of different price but same quantity
+# if you have a type of phone that share the same attributes but has addition quirkes
+# it it good practice into inherit from the Item class of the phone and add new attributes
+# in this case the new attributes will be the phone is broken.
 
-Item.instantiate_from_csv()
+class Phone(Item):
+    all = []
 
-print(Item.all)
-# it possible to use filter here.
-# for instance in Item.all:
-#     print(instance.name, ', ', instance.price)
+    # witout using the super, you have to copy nad paste the attributes from Item class into tthe child
+    def __init__(self, name: str, price: float, quantity=0, broken_phones=0):
+        # Running validation to the received arguments
+        assert price >= 0, f'price {price} is not greater than or equal to zero!'
+        assert quantity >= 0, f'Quantity {quantity} is not greater or equal to zero!'
+        assert broken_phones >= 0, f'Quantity {broken_phones} is not greater or equal to zero!'
+        # Assign to self object
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.broken_phones = broken_phones
+        # Append the instance to the all list
+        Phone.all.append(self)
+
+
+phone1 = Phone('jscPhonev10', 500, 5, 1)
+print(phone1.calc_total_price())
+phone2 = Phone('jscPhonev10', 700, 5, 1)
