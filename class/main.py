@@ -24,18 +24,35 @@ class Item:
 
     # this decorator convert the function instance method to a class method
     @classmethod
-    def instantiate_from_csv(cls): # the cls is justan argument that refers to the class rather than the instances
+    def instantiate_from_csv(cls):  # the cls is just  an argument that refers to the class rather than the instances
         with open('items.csv', 'r') as f:
-            reader = csv.DictReader(f) #reads our contents as a least of dictionaries
-            items = list(reader) #converts the reader into a list and
+            reader = csv.DictReader(f)  # reads our contents as a least of dictionaries
+            items = list(reader)  # converts the reader into a list and
 
         for item in items:
-            print(item)
+            Item(
+                name=item.get('name'),
+                price=float(item.get('price')),
+                quantity=int(item.get('quantity')))
+
+    # static method should have a connection toe the class you are working with
+    @staticmethod
+    def is_integer(num):
+        # We will count the floats that are point zero
+        # For i.e: 5.0, 10.0
+        if isinstance(num, float):
+            return num.is_integer()
+        elif isinstance(num, int):
+            return True
+        else:
+            return False
 
     # Used to display the list of instances
     def __repr__(self):
         return f"Item('{self.name}', {self.price}, {self.quantity})"
 
+
+print(Item.is_integer((7.01)))
 
 Item.instantiate_from_csv()
 
