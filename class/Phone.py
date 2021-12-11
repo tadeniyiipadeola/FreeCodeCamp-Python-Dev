@@ -1,4 +1,10 @@
+from Item import Item
 
+
+# imagine you have an Item phone with two instance of different price but same quantity
+# if you have a type of phone that share the same attributes but has addition quirkes
+# it it good practice into inherit from the Item class of the phone and add new attributes
+# in this case the new attributes will be the phone is broken.
 class Phone(Item):
     # without using the super, you have to copy nad paste the attributes from Item class into tthe child
     def __init__(self, name: str, price: float, quantity=0, broken_phones=0):

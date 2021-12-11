@@ -1,3 +1,6 @@
+import csv
+
+
 class Item:
     pay_rate = 0.8  # pay rate after the discount is applied
     all = []
@@ -47,4 +50,3 @@ class Item:
     # Used to display the list of instances
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
-
