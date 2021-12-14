@@ -10,19 +10,23 @@ class Item:
         assert price >= 0, f'price {price} is not greater than or equal to zero!'
         assert quantity >= 0, f'Quantity {quantity} is not greater or equal to zero!'
         # Assign to self object
-        self.__name = name #one underscore restricts, making the attribute read only from outside the class.
-        self.price = price #double underscore makes it private for read only but un acccessable outsidethe class. Setter required
+        self.__name = name  # one underscore restricts, making the attribute read only from outside the class.
+        self.price = price  # double underscore makes it private for read only but un acccessable outsidethe class. Setter required
         self.quantity = quantity
         # Append the instance to the all list
         Item.all.append(self)
-    #property has become restricted or private. to access you need a setter function
+
+    # property has become restricted or private. to access you need a setter function
     @property
     def name(self):
         return self.__name
 
     @name.setter
     def name(self, value):
-        self.__name= value
+        if len(value) > 10:
+            raise Exception('The name is too long!')
+        else:
+            self.__name = value
 
     def calc_total_price(self):
         return self.price * self.quantity
@@ -59,7 +63,8 @@ class Item:
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
-    #Property Decorator = Read-only
-    @property  # decorator allow you to make attributes read only, cant change the attribute after it's been instantiated
+    # Property Decorator = Read-only
+    @property  # decorator allow you to make attributes read only, cant change the attribute after it's been
+    # instantiated
     def read_only_name(self):
         return "AAA"
